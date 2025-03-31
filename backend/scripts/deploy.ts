@@ -1,11 +1,11 @@
-const hre = require("hardhat");
+import { ethers } from "hardhat";
 
 async function main() {
-    const Layer2 = await hre.ethers.getContractFactory("Layer2");
+    const Layer2 = await ethers.getContractFactory("Layer2");
     const layer2 = await Layer2.deploy();
 
-    await layer2.deployed();
-    console.log("Layer2 deployed to:", layer2.address);
+    await layer2.waitForDeployment();
+    console.log("Layer2 deployed to:", await layer2.getAddress());
 }
 
 main()
